@@ -21,12 +21,12 @@ public class EmployeeController {
     CompanyRepository companyRepository;
 
 
-    @GetMapping("/employee/{companyId}")
+    @GetMapping("/employees/{companyId}")
     public List<Employee> getEmployees(@PathVariable Long companyId) {
         return employeeRepository.findByCompanyIdOrderByLastName(companyId);
     }
 
-    @GetMapping("/employee/{companyId}/{employeeId}")
+    @GetMapping("/employees/{companyId}/{employeeId}")
     public Employee getEmployees(@PathVariable Long companyId, @PathVariable Long employeeId){
 
         //should be using companyId as well - security reasons - TODO research this
@@ -34,7 +34,7 @@ public class EmployeeController {
                 new ResourceNotFoundException(employeeId, "Employee not found with id = " + employeeId ));
     }
 
-    @PostMapping("/employee/{companyId}")
+    @PostMapping("/employees/{companyId}")
     public Employee addEmployee(@PathVariable Long companyId, @Valid @RequestBody Employee employee){
         if (!companyRepository.existsById(companyId)) {
             throw new ResourceNotFoundException(companyId, "Company not found with id " + companyId);
@@ -44,7 +44,7 @@ public class EmployeeController {
     }
 
 
-    @PutMapping("/employee/{companyId}/{employeeId}")
+    @PutMapping("/employees/{companyId}/{employeeId}")
     public Employee updateEmployee(@PathVariable Long companyId, @PathVariable Long employeeId,
                                   @Valid @RequestBody Employee employeeRequest){
 

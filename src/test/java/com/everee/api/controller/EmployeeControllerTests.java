@@ -53,7 +53,7 @@ public class EmployeeControllerTests {
         given(employeeRepository.findByCompanyIdOrderByLastName(1l)).willReturn(allEmployees);
 
         //mock call to the API with the call to the DB mooked out in the preceding given() method
-        mvc.perform(get("/employee/{companyId}", 1l)
+        mvc.perform(get("/employees/{companyId}", 1l)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))
